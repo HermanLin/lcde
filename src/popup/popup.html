@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <style>
+            .lcde {
+                text-align: center;
+            }
+
+            .highlight-orange {
+                color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="lcde">
+            <h2>
+                L<span class="highlight-orange">C</span>D<span class="highlight-orange">E</span>
+            </h2>
+            <button id="lcde-button">Extract Problem</button>
+            <div id="lcde-result"></div>
+        </div>
+    </body>
+    <script src="../utils/utilities.js"></script>
+    <script src="../content-scripts/extract-problem.js"></script>
+    <script src="../utils/html-translator.js"></script>
+    <script src="../utils/generate-markdown.js"></script>
+    <script src="popup.js"></script>
+</html>
