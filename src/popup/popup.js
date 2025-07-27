@@ -1,19 +1,31 @@
 'use strict';
 
-const lcdeButton = document.getElementById('lcde-button');
-lcdeButton.addEventListener('click', () => {
-    onClick();
+document.addEventListener('DOMContentLoaded', async () => {
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    const lcdeButton = document.getElementById('lcde-button');
+    const urlCheck = await browser.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['../content-scripts/verify-url.js'],
+    });
 
-    setTimeout(function () {
-        window.close();
-    }, 100);
+    const problemAvailable = urlCheck[0]?.result;
+    if (problemAvailable) {
+        lcdeButton.disabled = false;
+        lcdeButton.addEventListener('click', async () => {
+            onClick(tab.id);
+            setTimeout(function () {
+                window.close();
+            }, 100);
+        });
+    } else {
+        const resultEl = document.getElementById('lcde-result');
+        resultEl.textContent = 'Problem description unavailable';
+    }
 });
 
-async function onClick() {
-    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-    const results = await browser.scripting.executeScript({
-        target: { tabId: tab.id },
+async function onClick(tabId) {
+    await browser.scripting.executeScript({
+        target: { tabId },
         func: extractProblem,
     });
 }

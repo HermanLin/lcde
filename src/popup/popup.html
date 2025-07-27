@@ -11,6 +11,14 @@
             .highlight-orange {
                 color: orange;
             }
+
+            #lcde-result {
+                padding: 1em;
+            }
+
+            #lcde-result:empty {
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -18,7 +26,7 @@
             <h2>
                 L<span class="highlight-orange">C</span>D<span class="highlight-orange">E</span>
             </h2>
-            <button id="lcde-button">Extract Problem</button>
+            <button id="lcde-button" disabled>Extract Problem</button>
             <div id="lcde-result"></div>
         </div>
     </body>
